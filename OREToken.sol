@@ -1,16 +1,16 @@
-// SPDX-License-Identifier: GNUv3
+// SPDX-License-Identifier: MIT
 
 pragma solidity 0.8.6;
 
 
-import "node_modules/@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol";
-import "node_modules/@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol";
-import "node_modules/@openzeppelin/contracts-upgradeable/utils/math/SafeMathUpgradeable.sol";
-import "node_modules/@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol";
-import "node_modules/@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
-import "node_modules/@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
-import "node_modules/@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
-import "node_modules/@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/utils/ContextUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/utils/math/SafeMathUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
+import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/security/PausableUpgradeable.sol";
 
 contract OREToken is ContextUpgradeable, IERC20Upgradeable, OwnableUpgradeable, ReentrancyGuardUpgradeable, PausableUpgradeable {
     using SafeMathUpgradeable for uint256;
@@ -236,7 +236,7 @@ contract OREToken is ContextUpgradeable, IERC20Upgradeable, OwnableUpgradeable, 
 
         // Remove fees for transfers to and from charity account or to excluded account
         bool takeFee = true;
-        if (FeeAddress == sender || FeeAddress == recipient || _isExcluded[recipient]) {
+        if (FeeAddress == sender || FeeAddress == recipient || _isExcluded[recipient] || _isExcluded[sender]) {
             takeFee = false;
         }
 
